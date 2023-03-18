@@ -1,1 +1,1 @@
-py WppBot.py
+py _birthdayBot.py
