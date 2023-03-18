@@ -9,19 +9,19 @@ Send automatized messages to your contact list at an specific hour and birthday 
 
 * Copy the file in your repository
 
-    git clone https://github.com/Ulysses-Alv/WppBot.git
+    ```git clone https://github.com/Ulysses-Alv/WppBot.git```
 * Install the requirements
 
-    pip install -r requirements.txt
+    ```pip install -r requirements.txt```
 ## How to send automatized Messages
 
 * Open GUI to create your message. (tip: check automatizedMessage.json if your message was succesfully created):
 
-    py _GUIMessage.py
+    ```py _GUIMessage.py```
 
 * Execute _onTimeSender.py:
 
-    py _onTimeSender.py
+    ```py _onTimeSender.py```
 
 * It's ready. It will send the message at the hour you said.
 Remember: You have to delete it or it will send the message again the next day.
@@ -29,7 +29,7 @@ Remember: You have to delete it or it will send the message again the next day.
 ## How to send birthday messages.
 * Open GUI to create your message. (tip: check birthdays.json if your message was succesfully created):
 
-    py _GUIBirthday.py
+    ```py _GUIBirthday.py```
 * **In Windows:** 
 * go to task scheduler
 * Create new task
