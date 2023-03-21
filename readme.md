@@ -11,7 +11,7 @@ Send automatized messages to your contact list at an specific hour and birthday 
 
 ```
     git clone https://github.com/Ulysses-Alv/WppBot.git
-    ```
+    
 * Install the requirements
 ```
     pip install -r requirements.txt
