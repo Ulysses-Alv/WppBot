@@ -1,9 +1,9 @@
 import json
     
-with open("cumples.json", "r") as f:
-    birthdayJson = json.load(f)
 
 def addMessage(contactName, birthday, text):
+    with open("./database/cumples.json", "r") as f:
+        birthdayJson = json.load(f)
     new_obj = {
         "name": contactName,
         "birthdate": birthday,

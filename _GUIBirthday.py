@@ -1,6 +1,12 @@
 import tkinter as tk
 import _addBirthday as add
 import _deleteMessage as delete
+import os
+
+if not os.path.exists('./database/birthdays.json'):
+    # Si el archivo no existe, lo creamos
+    with open('./database/birthdays.json', 'w') as f:
+        f.write('{"Gente": []}')
 
 
 def guardar():
@@ -33,11 +39,11 @@ def guardar():
 
 
 def borrar():
-    if not delete.deleteMessage(input_nombreToDelete.get(), "birthdays.json"):
+    if not delete.deleteMessageByName(input_nombreToDelete.get(), "./database/birthdays.json"):
         label_errorDel.config(
             text="Ese nombre no existe. \n Ingrese un nombre válido")
     else:
-        delete.deleteMessage(input_nombreToDelete.get(), "birthdays.json")
+        delete.deleteMessageByName(input_nombreToDelete.get(), "./database/birthdays.json")
         input_nombreToDelete.delete(0, tk.END)
 
 
@@ -46,7 +52,8 @@ root.geometry("450x600+0+0")
 root.resizable(False, False)
 root.attributes('-fullscreen', False)
 
-label_title = tk.Label(root, text="Agregar mensaje de cumpleaños", font=("Arial", 20), anchor="n")
+label_title = tk.Label(
+    root, text="Agregar mensaje de cumpleaños", font=("Arial", 20), anchor="n")
 label_title.pack(fill="x")
 
 label_nombre = tk.Label(root, text="Nombre")

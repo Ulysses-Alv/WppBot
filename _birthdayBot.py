@@ -5,6 +5,7 @@ import usageMemory
 import time
 import datetime
 
+
 def sendBirthDayMessage(driver, contactName, birthdayText, birthday):
     dia_mes_actual = datetime.datetime.now().strftime("%d/%m")
     if birthday == dia_mes_actual:
@@ -12,9 +13,10 @@ def sendBirthDayMessage(driver, contactName, birthdayText, birthday):
         time.sleep(1)
         _wppBot.sendMessage(driver, birthdayText)
         time.sleep(1)
-        
+
+
 def main():
-    with open("cumples.json", "r") as f:
+    with open("./database/cumples.json", "r") as f:
         data = json.load(f)
     driver = _wppBot.openWhatsapp()
     for persona in data["Gente"]:
@@ -22,7 +24,7 @@ def main():
             driver, persona["name"], persona["birthdayMessage"],  persona["birthdate"])
     usageMemory.printUsage()
     sys.exit()
-        
+
 
 if __name__ == '__main__':
     main()
