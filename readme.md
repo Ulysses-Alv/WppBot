@@ -11,11 +11,11 @@ Send automatized messages to your contact list at an specific hour and birthday 
 
 ```
     git clone https://github.com/Ulysses-Alv/WppBot.git
-    ```
+```
 * Install the requirements
 ```
     pip install -r requirements.txt
-    ```
+```
 ## How to send automatized Messages
 
 * Open GUI to create your message. (tip: check automatizedMessage.json if your message was succesfully created):
