@@ -1,10 +1,9 @@
 import json
 
-with open("cumples.json", "r") as f:
-    birthdayJson = json.load(f)
-
 
 def deleteMessage(name):
+    with open("./database/cumples.json", "r") as f:
+        birthdayJson = json.load(f)
 
     data = birthdayJson
     name_to_find = name
