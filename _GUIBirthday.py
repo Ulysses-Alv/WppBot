@@ -41,7 +41,7 @@ def guardar():
 def borrar():
     if not delete.deleteMessageByName(input_nombreToDelete.get(), "./database/birthdays.json"):
         label_errorDel.config(
-            text="Ese nombre no existe. \n Ingrese un nombre válido")
+            text="Ese nombre no existe. \n Ingrese un nombre válido.")
     else:
         delete.deleteMessageByName(input_nombreToDelete.get(), "./database/birthdays.json")
         input_nombreToDelete.delete(0, tk.END)

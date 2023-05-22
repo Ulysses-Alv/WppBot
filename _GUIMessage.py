@@ -3,6 +3,8 @@ import _addMessage as add
 import _deleteMessage as delete
 import os
 import _generateLogAdded as genLog
+from tkinter import filedialog
+from PIL import Image, ImageTk
 
 if not os.path.exists('./database/automatizeMessage.json'):
     # Si el archivo no existe, lo creamos
@@ -36,8 +38,6 @@ def guardar():
         gen_id = add.newId
         genLog.generateLogAdd(nombre, hora, minutos, texto, is_one_time_var, gen_id)
 
-        # Borra el contenido de los inputs
-
         input_nombre.delete(0, tk.END)
         input_hora.delete(0, tk.END)
         input_minutos.delete(0, tk.END)
@@ -53,6 +53,16 @@ def borrar():
         delete.deleteMessageByName(input_nombreToDelete.get(), "./database/automatizeMessage.json")
         input_nombreToDelete.delete(0, tk.END)
 
+def open_file_dialog():
+    file_path = filedialog.askopenfilename(title="Seleccionar archivo", filetypes=[("Archivos de imagen", "*.png;*.jpg;*.jpeg")])
+    if file_path:
+        image = Image.open(file_path)
+        image.thumbnail((600, 600))
+        tk_image = ImageTk.PhotoImage(image)
+        image_label = tk.Label(root)
+        image_label.image = tk_image  # asigna la imagen a un atributo de la etiqueta de imagen
+        image_label.configure(image=tk_image)
+        image_label.pack()
 
 root = tk.Tk()
 root.geometry("450x600+0+0")
@@ -77,6 +87,9 @@ label_minutos = tk.Label(root, text="Minutos (0-59)")
 label_minutos.pack()
 input_minutos = tk.Entry(root)
 input_minutos.pack()
+
+open_button = tk.Button(root, text="Seleccionar archivo", command=open_file_dialog)
+open_button.pack()
 
 label_texto = tk.Label(root, text="Texto")
 label_texto.pack()

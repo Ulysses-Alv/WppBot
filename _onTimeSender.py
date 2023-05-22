@@ -12,6 +12,7 @@ id = ""
 data = []
 driver = ""
 
+
 with open("./database/automatizeMessage.json", "r") as f:
     data = json.load(f)
 

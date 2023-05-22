@@ -2,7 +2,7 @@ import json
 import _generateID as gID
 
     
-def addMessage(contactName, hour, minute, text, isOneTimeBool):
+def addMessage(contactName, hour, minute, textOrImage, isOneTimeBool):
     with open("./database/automatizeMessage.json", "r") as f:
         autoJson = json.load(f)
     global newId
@@ -11,7 +11,7 @@ def addMessage(contactName, hour, minute, text, isOneTimeBool):
         "name": contactName,
         "th": hour,
         "tm": minute,
-        "message": text,
+        "message": textOrImage,
         "isOneTime": isOneTimeBool,
         "id": newId
     }

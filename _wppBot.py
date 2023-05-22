@@ -5,7 +5,21 @@ import time
 import _generateID as gID
 from win10toast import ToastNotifier
 import _deleteMessage as delete
+import os
+import pyautogui as pyt
 contactIsArchivado = False
+
+from PIL import ImageFile
+import pyperclip
+import base64
+
+def copy_image_to_clipboard(image_path):
+    
+    with open(image_path, 'rb') as f:
+        image_bytes = f.read()
+    image_b64 = base64.b64encode(image_bytes).decode('utf-8')
+    pyperclip.copy(image_b64)
+
 
 
 def openWhatsapp():
@@ -18,14 +32,14 @@ def openWhatsapp():
         driver.find_element
         assert 'WhatsApp' in driver.title
         # If your Wpp tooks too long to start, you should increase this value.
-        time.sleep(15)
+        time.sleep(25)
         return driver
     except InvalidArgumentException:
         print('ERROR: You may already have a Selenium navegator running in the background, close the window and run the code again, shutting down...')
         exit()
 
 
-def goToAndSendMessage(driver, contacto, text, isOneTime):
+def goToAndSendMessage(driver, contacto, textOrImagePath):
     canContinue = True
     try:
         goToChat(driver, contacto)
@@ -33,9 +47,9 @@ def goToAndSendMessage(driver, contacto, text, isOneTime):
         canContinue = False
         with open('failedLog.txt', 'a') as f:
             # If the contact name is not valid, the program will continue
-            f.write("No existe: {}".format(contacto))
+            f.write("No existe: {}\n".format(contacto))
     if canContinue:
-        sendMessage(driver, text)
+        sendMessage(driver, textOrImagePath)
         toastNotifier(contacto)
         time.sleep(1)
 
@@ -73,10 +87,14 @@ def goToArchivados(driver):
     time.sleep(1)
 
 
-def sendMessage(driver, text):
+def sendMessage(driver, textOrImage):
     global contactIsArchivado
-    textBox = driver.find_elements(By.CLASS_NAME, "iq0m558w")
-    textBox[1].send_keys(text)
+    if os.path.exists(textOrImage):
+        copy_image_to_clipboard(textOrImage)
+        pyt.hotkey('ctrl', 'v')
+    else:
+        textBox = driver.find_elements(By.CLASS_NAME, "iq0m558w")
+        textBox[1].send_keys(textOrImage)
     clickSend(driver)
     if contactIsArchivado:
         goBack(driver)
